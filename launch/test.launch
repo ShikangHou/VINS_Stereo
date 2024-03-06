@@ -1,0 +1,5 @@
+<launch>
+
+    <node pkg = "vins_stereo" type = "test_node" name = "test_node" output = "screen" />
+
+</launch>

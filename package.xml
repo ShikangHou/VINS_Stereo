@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <package format="2">
-  <name>VINS_Stereo</name>
+  <name>vins_stereo</name>
   <version>0.0.0</version>
   <description>The VINS_Stereo package</description>
 

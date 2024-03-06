@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.0.2)
-project(VINS_Stereo)
+project(vins_stereo)
 
-set(CMAKE_BUILD_TYPE "Release")
+set(CMAKE_BUILD_TYPE "Debug")
 set(CMAKE_CXX_FLAGS "-std=c++11")
 set(CMAKE_CXX_FLAGS_RELEASE "-O3 -Wall -g")
 
@@ -15,8 +15,14 @@ find_package(catkin REQUIRED COMPONENTS
   tf2_geometry_msgs
   tf2_ros
   cv_bridge
+
 )
 
+find_package(Threads REQUIRED)
+find_package(Eigen3 REQUIRED)
+find_package(OpenCV REQUIRED)
+find_package(Ceres REQUIRED)
+find_package(Boost REQUIRED COMPONENTS filesystem program_options system)
 ###################################
 ## catkin specific configuration ##
 ###################################
@@ -40,22 +46,33 @@ catkin_package(
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
 include_directories(
-# include
+  include
+  include/feature_tracker
   ${catkin_INCLUDE_DIRS}
+  ${EIGEN3_INCLUDE_DIR}
+  ${CERES_INCLUDE_DIRS}
+  ${Boost_INCLUDE_DIRS}
 )
 
 ## Declare a C++ library
-# add_library(${PROJECT_NAME}
-#   src/${PROJECT_NAME}/VINS_Stereo.cpp
-# )
+add_library(lib_vins
+   src/feature_tracker/img_feature_tracker.cpp
+   src/parameters.cpp
+)
+target_link_libraries(lib_vins
+    ${OpenCV_LIBS} 
+    ${CERES_LIBRARIES}
+)
 
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
-# add_executable(${PROJECT_NAME}_node src/VINS_Stereo_node.cpp)
+add_executable(test_node src/test_node.cpp)
 
 
 ## Specify libraries to link a library or executable target against
-# target_link_libraries(${PROJECT_NAME}_node
-#   ${catkin_LIBRARIES}
-# )
+target_link_libraries(test_node
+  ${catkin_LIBRARIES}
+  lib_vins
+  Threads::Threads
+)
