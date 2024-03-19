@@ -48,6 +48,7 @@ catkin_package(
 include_directories(
   include
   include/feature_tracker
+  include/backend
   ${catkin_INCLUDE_DIRS}
   ${EIGEN3_INCLUDE_DIR}
   ${CERES_INCLUDE_DIRS}
@@ -56,7 +57,7 @@ include_directories(
 
 ## Declare a C++ library
 add_library(lib_vins
-   src/feature_tracker/img_feature_tracker.cpp
+   src/feature_tracker/feature_tracker.cpp
    src/parameters.cpp
 )
 target_link_libraries(lib_vins
