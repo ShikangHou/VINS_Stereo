@@ -1,29 +1,14 @@
 #ifndef __FEATURE_TRACKER_H
 #define __FEATURE_TRACKER_H
 
-#include "common_include.h"
-
-// class Feature
-// {
-//     public:
-//     cv::Point2f
-
-// }f
-
-// class Feature
-// {
-//     public:
-
-//     unsigned long _feature_id;
-
-// }
+#include "../../src/common_include.h"
 
 class FeatureTracker
 {
  public:
 	EIGEN_MAKE_ALIGNED_OPERATOR_NEW;
 
-	typedef std::map<int, std::vector<std::pair<int, Eigen::Matrix<double, 7, 1>>>>
+	typedef std::map<unsigned long, std::vector<std::pair<int, Eigen::Matrix<double, 7, 1>>>>
 		FeatureInImg; // feature_id  cam_id  pts
 
 	FeatureTracker();
@@ -62,7 +47,8 @@ class FeatureTracker
 	std::vector<cv::Point2f> cur_pts_, cur_right_pts_;     // 当前左帧特征点坐标　　当前右帧特征点坐标
 	std::vector<cv::Point2f> prev_pts_;                    //  前一左帧
 	std::vector<cv::Point2f> cur_unpts_, cur_right_unpts_; // 当前左帧特征点去畸变归一化坐标　　当前右帧特征点去畸变归一化坐标　　
-	std::map<unsigned long, cv::Point2f> cur_id_unpts_map_, prev_id_unpts_map_, cur_id_right_unpts_map_, prev_id_right_unpts_map_;
+	std::map<unsigned long, cv::Point2f> cur_id_unpts_map_, prev_id_unpts_map_, cur_id_right_unpts_map_,
+		prev_id_right_unpts_map_;
 	std::vector<cv::Point2f> pts_velocity_, right_pts_velocity_;
 
 	unsigned long feature_id_generator_;

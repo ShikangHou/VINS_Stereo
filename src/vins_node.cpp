@@ -1,4 +1,4 @@
-#include "feature_tracker.h"
+#include "feature_tracker/feature_tracker.h"
 #include "parameters.h"
 #include <ros/ros.h>
 #include <cv_bridge/cv_bridge.h>
@@ -71,20 +71,20 @@ void SyncImageMsgs()
 			if (!img0.empty())
 			{
 				FeatureTracker::FeatureInImg fi = feature_tracker.trackImage(time, img0, img1);
-				for (auto &f : fi)
-				{
-					cv::circle(img0, cv::Point2f(f.second[0].second[3], f.second[0].second[4]), 2,
-							   cv::Scalar(0, 255, 0), -1);
-					if (f.second.size() > 1)
-					{
-						cv::circle(img1, cv::Point2f(f.second[1].second[3], f.second[1].second[4]), 2,
-								   cv::Scalar(0, 255, 0), -1);
-					}
-				}
-				sensor_msgs::ImagePtr msg = cv_bridge::CvImage(std_msgs::Header(), "mono8", img0).toImageMsg();
-				pub1.publish(msg);
-				msg = cv_bridge::CvImage(std_msgs::Header(), "mono8", img1).toImageMsg();
-				pub2.publish(msg);
+//				for (auto &f : fi)
+//				{
+//					cv::circle(img0, cv::Point2f(f.second[0].second[3], f.second[0].second[4]), 2,
+//							   cv::Scalar(0, 255, 0), -1);
+//					if (f.second.size() > 1)
+//					{
+//						cv::circle(img1, cv::Point2f(f.second[1].second[3], f.second[1].second[4]), 2,
+//								   cv::Scalar(0, 255, 0), -1);
+//					}
+//				}
+//				sensor_msgs::ImagePtr msg = cv_bridge::CvImage(std_msgs::Header(), "mono8", img0).toImageMsg();
+//				pub1.publish(msg);
+//				msg = cv_bridge::CvImage(std_msgs::Header(), "mono8", img1).toImageMsg();
+//				pub2.publish(msg);
 			}
 		}
 
@@ -101,13 +101,13 @@ void SyncImageMsgs()
 			if (!img0.empty())
 			{
 				FeatureTracker::FeatureInImg fi = feature_tracker.trackImage(time, img0, img1);
-				for (auto &f : fi)
-				{
-					cv::circle(img0, cv::Point2f(f.second[0].second[3], f.second[0].second[4]), 2,
-							   cv::Scalar(0, 255, 0), -1);
-				}
-				sensor_msgs::ImagePtr msg = cv_bridge::CvImage(std_msgs::Header(), "mono8", img0).toImageMsg();
-				pub1.publish(msg);
+//				for (auto &f : fi)
+//				{
+//					cv::circle(img0, cv::Point2f(f.second[0].second[3], f.second[0].second[4]), 2,
+//							   cv::Scalar(0, 255, 0), -1);
+//				}
+//				sensor_msgs::ImagePtr msg = cv_bridge::CvImage(std_msgs::Header(), "mono8", img0).toImageMsg();
+//				pub1.publish(msg);
 			}
 		}
 

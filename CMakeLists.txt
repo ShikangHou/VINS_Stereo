@@ -46,9 +46,6 @@ catkin_package(
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
 include_directories(
-  include
-  include/feature_tracker
-  include/backend
   ${catkin_INCLUDE_DIRS}
   ${EIGEN3_INCLUDE_DIR}
   ${CERES_INCLUDE_DIRS}
@@ -68,11 +65,11 @@ target_link_libraries(lib_vins
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
-add_executable(test_node src/test_node.cpp)
+add_executable(vins_node src/vins_node.cpp)
 
 
 ## Specify libraries to link a library or executable target against
-target_link_libraries(test_node
+target_link_libraries(vins_node
   ${catkin_LIBRARIES}
   lib_vins
   Threads::Threads

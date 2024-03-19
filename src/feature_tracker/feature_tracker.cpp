@@ -1,5 +1,5 @@
 #include "feature_tracker.h"
-#include "parameters.h"
+#include "../parameters.h"
 #include <opencv2/opencv.hpp>
 #include <opencv2/core/fast_math.hpp>
 
@@ -8,7 +8,7 @@ FeatureTracker::FeatureTracker()
 	feature_id_generator_ = 0;
 	k = (cv::Mat_<double>(3, 3) << 520.9, 0, 325.1, 0, 521.0, 249.7, 0, 0, 1);
 	dist = cv::Mat::zeros(5, 1, CV_64F);
-};
+}
 
 double FeatureTracker::distance(cv::Point2f& pt1, cv::Point2f& pt2)
 {
@@ -21,8 +21,8 @@ double FeatureTracker::distance(cv::Point2f& pt1, cv::Point2f& pt2)
 bool FeatureTracker::inBorder(const cv::Point2f& pt) const
 {
 	// round 四舍五入　　ceil 向上取整　　floor　向下取整
-	int img_x = std::round(pt.x); // 四舍五入
-	int img_y = std::round(pt.y);
+	int img_x = (int)std::round(pt.x); // 四舍五入
+	int img_y = (int)std::round(pt.y);
 	if (img_x >= BORDER_SIZE && img_x <= cols_ - BORDER_SIZE && img_y >= BORDER_SIZE && img_y <= rows_ - BORDER_SIZE)
 	{
 		return false;
@@ -187,7 +187,7 @@ FeatureTracker::FeatureInImg FeatureTracker::trackImage(double cur_time, const c
 
 		for (size_t i = 0; i < feature_ids_.size(); i++)
 		{
-			int id = feature_ids_[i];
+			unsigned long id = feature_ids_[i];
 			double x, y, z;
 			x = cur_unpts_[i].x;
 			y = cur_unpts_[i].y;
@@ -262,7 +262,7 @@ FeatureTracker::FeatureInImg FeatureTracker::trackImage(double cur_time, const c
 
 		for (size_t i = 0; i < feature_right_ids_.size(); i++)
 		{
-			int id = feature_ids_[i];
+			unsigned long id = feature_ids_[i];
 			double x, y, z;
 			x = cur_unpts_[i].x;
 			y = cur_unpts_[i].y;
